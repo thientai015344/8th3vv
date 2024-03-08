@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="thiep.css">
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script src="thiep.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="flip-panel">
+        <audio style="display: none;" id="autoplay" src="beat.mp3"></audio>
+        <div class="panel">
+           <div class="front">
+              <div class="content">
+                 <div class="container">
+                    <div class="glass"></div>
+                    <div class="thorns">
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                    </div>
+                    <div class="glow"></div>
+                    <div class="rose-leaves">
+                       <div></div>
+                       <div></div>
+                    </div>
+                    <div class="rose-petals">
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                    </div>
+                    <div class="sparkles">
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                       <div></div>
+                    </div>
+                 </div>
+                 <h1 class="BiaHappy">Women's day</h1>
+              </div>
+           </div>
+           <div class="back">
+              <div class="content">
+                 <h1 class="hpapywn">Happy Women's DAY 8TH MARCH</h1>
+                 <div class="hoaxoe">
+                    <div class="droplet" id="no1"></div>
+                    <div class="droplet" id="no2"></div>
+                    <div class="droplet" id="no3"></div>
+                    <div class="droplet" id="no4"></div>
+                    <div class="droplet" id="no5"></div>
+                    <div class="droplet" id="no6"></div>
+                    <div class="droplet" id="no7"></div>
+                    <div class="droplet" id="no8"></div>
+                    <div class="droplet" id="no9"></div>
+                    <div class="droplet" id="no10"></div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="panel">
+           <div class="front">
+              <div class="content">
+                 <p id="animatedText"> </p>
+              </div>
+           </div>
+           <div class="back">
+                <div class="content">
+                    <h1 class="endH1">
+                    Happy Women's Day,Em 💕💙💖🖤❤💚 💐
+                    <h1>
+                    <div class="scene">
+                        <div class="flower flower--left">
+                            <div class="inner"></div>
+                        </div>
+                        <div class="flower flower--right">
+                            <div class="inner"></div>
+                        </div>
+                        <div class="flower"></div>
+                        <div class="branch"></div>
+                        <div class="leave leave--left">
+                            <div class="inner"></div>
+                        </div>
+                        <div class="leave leave--right">
+                            <div class="inner"></div>
+                        </div>
+                    <div>
+                </div>
+            </div>
+              
+        </div>
+    </div>
+    <h3 class="notifyhoa">bấm vào bông hoa</h3>
+    <button id="myButton" onclick="start()">Click me</button>
+    </div>
+    <script>
+
+    var indexchya = 1;
+        var tex = "Xin được gửi lời chúc nồng nàn, tràn đầy yêu thương nhất đến Em. Chúc Em có ngày 8/3 và 364 ngày còn lại trong năm luôn bình an, vui vẻ và thành công trong công việc lẫn trong cuộc sống nha."
+        function chaychuloichuc() {
+            var bong = document.getElementsByClassName("notifyhoa")[0];
+            if (bong) {
+            bong.remove();
+            }
+
+            var characters = tex.split('');
+            var numCharacters = characters.length;
+            var charactersProcessed = 0;
+    
+            $('#animatedText').empty();
+
+            $.each(characters, function (index, char) {
+                setTimeout(function () {
+                    $('#animatedText').append('<span style="display: none;">' + char + '</span>').children(':last').fadeIn();
+
+                    charactersProcessed++      
+                }, 100 * index);
+            });
+            
+        }
+
+        function start() { 
+            document.getElementById('autoplay').play();
+            var button = document.getElementById("myButton");
+            button.style.display = "none";
+            
+            var bong = document.getElementsByClassName("notifyhoa")[0];
+            bong.style.display = "block";
+        }
+
+        var numPanels = $('.panel').length;
+
+        console.log(numPanels);
+        // if a panel is open, lower its z-idx
+        // otherwise, set zIdx back to original
+        function checkZ($aPanel) {
+        if ( $aPanel.hasClass('open') ) {
+            $aPanel.css('z-index','1');
+        } else {
+            // set z-index back to original stored in data
+            zIdx = $aPanel.data('zIdx');
+            $aPanel.css( 'z-index', zIdx );
+        }
+        }
+
+        // loop through all panels and reverse sort via zIdx
+        for (i=0; i<(numPanels); i++  ) {
+        var zIdx =  numPanels-i;
+        $('.panel').eq(i).css('z-index',zIdx).data('zIdx',zIdx);
+        }
+
+        // when clicking the front panel add class 'open' to panel
+        // if clicking bacl panel, remove 'open' from panel
+        $('.panel').on('click', '.front, .back', function() {
+        $(this).parent('.panel').toggleClass('open');
+        checkZ($(this).parent('.panel'));
+    if(indexchya == 1){
+        chaychuloichuc();
+    }
+        
+        
+        });
+    </script>
+
+</body>
+</html>
